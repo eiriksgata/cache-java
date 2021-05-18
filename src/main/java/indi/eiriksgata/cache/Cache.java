@@ -18,13 +18,12 @@ import java.util.concurrent.ConcurrentHashMap;
 public class Cache<T> {
 
     private ConcurrentHashMap<String, CacheData<T>> data = new ConcurrentHashMap<>();
-    private Timer recoveryTimer;
+    private Timer recoveryTimer = new Timer();
     private long recoveryInterval = 5000;
     private int recoveryMax = 20;
     private Queue<String> recoverQueue = new LinkedList<>();
 
     public Cache() {
-        recoveryTimer = new Timer();
         recoveryTimer.schedule(new TimerTask() {
             @Override
             public void run() {
@@ -39,6 +38,7 @@ public class Cache<T> {
                             if (System.currentTimeMillis() - updateTime > data.get(key).getTermOfValidity()) {
                                 data.remove(key);
                             }
+                            recoverQueue.add(key);
                         }
                     }
                 }
@@ -53,12 +53,17 @@ public class Cache<T> {
         cacheData.setUpdateTimestamp(System.currentTimeMillis());
         data.put(key, cacheData);
         recoverQueue.add(key);
+
     }
 
     public void set(String key, T value) {
         set(key, value, 0L);
     }
 
+    public T remove(String key) {
+        return data.remove(key).getContent();
+    }
+    
     public T get(String key) {
         if (System.currentTimeMillis() - data.get(key).getUpdateTimestamp() > data.get(key).getTermOfValidity()) {
             return null;
@@ -77,4 +82,9 @@ public class Cache<T> {
     public ConcurrentHashMap<String, CacheData<T>> getData() {
         return data;
     }
+
+    public void destroy() {
+        recoveryTimer.cancel();
+    }
+
 }
