@@ -24,11 +24,9 @@ public class CacheTest {
 
         System.out.println(cache.get("abc"));
 
-        System.out.println(cache.getData());
 
         Thread.sleep(3000);
 
-        System.out.println(cache.getData());
 
 
     }

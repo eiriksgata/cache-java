@@ -47,13 +47,15 @@ public class Cache<T> {
     }
 
     public void set(String key, T value, long termOfValidity) {
+        if (key == null) {
+            return;
+        }
         CacheData<T> cacheData = new CacheData<>();
         cacheData.setContent(value);
         cacheData.setTermOfValidity(termOfValidity);
         cacheData.setUpdateTimestamp(System.currentTimeMillis());
         data.put(key, cacheData);
         recoverQueue.add(key);
-
     }
 
     public void set(String key, T value) {
@@ -61,10 +63,16 @@ public class Cache<T> {
     }
 
     public T remove(String key) {
+        if (key == null){
+            return null;
+        }
         return data.remove(key).getContent();
     }
-    
+
     public T get(String key) {
+        if (key == null) {
+            return null;
+        }
         if (System.currentTimeMillis() - data.get(key).getUpdateTimestamp() > data.get(key).getTermOfValidity()) {
             return null;
         }
@@ -77,10 +85,6 @@ public class Cache<T> {
 
     public Timer getRecoveryTimer() {
         return recoveryTimer;
-    }
-
-    public ConcurrentHashMap<String, CacheData<T>> getData() {
-        return data;
     }
 
     public void destroy() {
