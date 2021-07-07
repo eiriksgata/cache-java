@@ -14,7 +14,7 @@ public class CacheTest {
     void test1() throws Exception {
         Cache<String> cache = new Cache<>();
 
-        cache.set("abc", "111", 2000);
+        cache.set("abc", "111",2000);
 
         cache.set("test1", "abc");
 
@@ -27,6 +27,7 @@ public class CacheTest {
 
         Thread.sleep(3000);
 
+        System.out.println(cache.get("abc"));
 
 
     }
