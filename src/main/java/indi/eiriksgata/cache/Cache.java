@@ -30,7 +30,11 @@ public class Cache<T> {
                 for (int i = 0; i < recoveryMax; i++) {
                     String key = recoverQueue.poll();
                     if (key != null) {
-                        if (data.get(key).getTermOfValidity() == 0) {
+                        if (data.get(key) == null) {
+                            data.remove(key);
+                            return;
+                        }
+                        if (data.get(key).getTermOfValidity() == 0 || data.get(key).getTermOfValidity() == null) {
                             return;
                         }
                         if (data.get(key) != null) {
@@ -63,15 +67,18 @@ public class Cache<T> {
     }
 
     public T remove(String key) {
-        if (key == null){
+        if (key == null) {
             return null;
         }
         return data.remove(key).getContent();
     }
 
     public T get(String key) {
-        if (key == null) {
+        if (key == null || data.get(key) == null) {
             return null;
+        }
+        if (data.get(key).getTermOfValidity() == null || data.get(key).getTermOfValidity() == 0) {
+            return data.get(key).getContent();
         }
         if (System.currentTimeMillis() - data.get(key).getUpdateTimestamp() > data.get(key).getTermOfValidity()) {
             return null;

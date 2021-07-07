@@ -8,8 +8,8 @@ package indi.eiriksgata.cache.entity;
  **/
 public class CacheData<T> {
 
-    private Long termOfValidity;
-    private Long updateTimestamp;
+    private Long termOfValidity = 0L;
+    private Long updateTimestamp = 0L;
     private T content;
 
     public void setContent(T content) {
