@@ -1,6 +1,8 @@
 import indi.eiriksgata.cache.Cache;
 import org.junit.jupiter.api.Test;
 
+import java.util.Map;
+
 /**
  * author: create by Keith
  * version: v1.0
@@ -28,7 +30,6 @@ public class CacheTest {
         Thread.sleep(3000);
 
         System.out.println(cache.get("abc"));
-
 
     }
 }
