@@ -1,19 +1,12 @@
-package indi.eiriksgata.cache;
+package com.github.eiriksgata.cache;
 
-import indi.eiriksgata.cache.entity.CacheData;
+import com.github.eiriksgata.cache.entity.CacheData;
 
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.ConcurrentHashMap;
-
-/**
- * author: create by Keith
- * version: v1.0
- * description: indi.eiriksgata.cache
- * date: 2021/5/18
- **/
 
 public class Cache<T> {
 

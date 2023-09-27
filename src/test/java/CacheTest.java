@@ -1,14 +1,6 @@
-import indi.eiriksgata.cache.Cache;
+import com.github.eiriksgata.cache.Cache;
 import org.junit.jupiter.api.Test;
 
-import java.util.Map;
-
-/**
- * author: create by Keith
- * version: v1.0
- * description: PACKAGE_NAME
- * date: 2021/5/18
- **/
 public class CacheTest {
 
 

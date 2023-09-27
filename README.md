@@ -4,7 +4,7 @@
 
 ## 快速使用
 
-引入参考： https://www.jitpack.io/#Eiriksgata/cache-java/
+引入参考： https://www.jitpack.io/#eiriksgata/cache-java/
 
 ### Maven
 
@@ -21,7 +21,7 @@
 * Step 2. Add the dependency
 ```pom
 	<dependency>
-	    <groupId>com.github.Eiriksgata</groupId>
+	    <groupId>com.github.eiriksgata</groupId>
 	    <artifactId>cache-java</artifactId>
 	    <version>Tag</version>
 	</dependency>
